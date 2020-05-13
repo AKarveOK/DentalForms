@@ -1,0 +1,144 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Test1500
+</name>
+</assembly>
+<members>
+<member name="T:Test1500.DBHelper.Parameters">
+	<summary>
+Description	    :	This function is used to Execute the Command
+Input			:	
+OutPut			:	
+Comments			:	
+ </summary>
+</member><member name="M:Test1500.DBHelper.EstablishFactoryConnection">
+	<summary>
+Description	    :	This function is used to Open Database Connection
+Input			:	NA
+OutPut			:	NA
+Comments			:	
+ </summary>
+</member><member name="M:Test1500.DBHelper.CloseFactoryConnection">
+	<summary>
+Description	    :	This function is used to Close Database Connection
+Input			:	NA
+OutPut			:	NA
+Comments			:	
+ </summary>
+</member><member name="T:Test1500.M1500Bill.tblInsurerDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblPatientDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblPatInsuranceDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblPatDiagnosesDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblDateOfServiceDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblChargesDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblTherapistDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblClinicDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblBillingProDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblInsurerRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblPatientRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblPatInsuranceRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblPatDiagnosesRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblDateOfServiceRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblChargesRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblTherapistRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblClinicRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblBillingProRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblInsurerRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblPatientRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblPatInsuranceRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblPatDiagnosesRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblDateOfServiceRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblChargesRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblTherapistRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblClinicRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Test1500.M1500Bill.tblBillingProRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Test1500.M1500Bill">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+</members>
+</doc>

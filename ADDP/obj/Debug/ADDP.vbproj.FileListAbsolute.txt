@@ -1,0 +1,10 @@
+D:\NewScape\ADDP\ADDP\bin\Debug\ADDP.exe.config
+D:\NewScape\ADDP\ADDP\bin\Debug\ADDP.exe
+D:\NewScape\ADDP\ADDP\bin\Debug\ADDP.pdb
+D:\NewScape\ADDP\ADDP\bin\Debug\ADDP.xml
+D:\NewScape\ADDP\ADDP\obj\Debug\ADDP.vbprojResolveAssemblyReference.cache
+D:\NewScape\ADDP\ADDP\obj\Debug\ADDP.Resources.resources
+D:\NewScape\ADDP\ADDP\obj\Debug\ADDP.vbproj.GenerateResource.Cache
+D:\NewScape\ADDP\ADDP\obj\Debug\ADDP.exe
+D:\NewScape\ADDP\ADDP\obj\Debug\ADDP.xml
+D:\NewScape\ADDP\ADDP\obj\Debug\ADDP.pdb
