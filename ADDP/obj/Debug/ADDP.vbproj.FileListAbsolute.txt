@@ -8,3 +8,13 @@ D:\NewScape\ADDP\ADDP\obj\Debug\ADDP.vbproj.GenerateResource.Cache
 D:\NewScape\ADDP\ADDP\obj\Debug\ADDP.exe
 D:\NewScape\ADDP\ADDP\obj\Debug\ADDP.xml
 D:\NewScape\ADDP\ADDP\obj\Debug\ADDP.pdb
+D:\NewScape\DentalForm\ADDP\bin\Debug\ADDP.exe.config
+D:\NewScape\DentalForm\ADDP\obj\Debug\ADDP.exe
+D:\NewScape\DentalForm\ADDP\obj\Debug\ADDP.xml
+D:\NewScape\DentalForm\ADDP\obj\Debug\ADDP.pdb
+D:\NewScape\DentalForm\ADDP\bin\Debug\ADDP.exe
+D:\NewScape\DentalForm\ADDP\bin\Debug\ADDP.pdb
+D:\NewScape\DentalForm\ADDP\bin\Debug\ADDP.xml
+D:\NewScape\DentalForm\ADDP\obj\Debug\ADDP.vbprojResolveAssemblyReference.cache
+D:\NewScape\DentalForm\ADDP\obj\Debug\ADDP.Resources.resources
+D:\NewScape\DentalForm\ADDP\obj\Debug\ADDP.vbproj.GenerateResource.Cache

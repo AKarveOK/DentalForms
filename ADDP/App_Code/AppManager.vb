@@ -6,13 +6,21 @@ Public Class AppManager
 
     Public Shared Sub ADDPStamp(ByVal PDFType As String, ByVal dtPat As DataTable, ByVal dtDen As DataTable, ByVal dtTooth As DataTable)
         Dim oldFile As String = "D:\NewScape\ADDPClaimForm.pdf"
-        Dim newFile As String = "D:\NewScape\ADDPClaimFormNew.pdf"
+        Dim document As Document
+        Dim reader As PdfReader
+        Dim newfile As String
 
-        Dim reader As PdfReader = New PdfReader(oldFile)
-        Dim size As Rectangle = reader.GetPageSizeWithRotation(1)
+        If PDFType = "P" Then
+            newfile = "D:\NewScape\ADDPDentalClaimFormPP.pdf"
+            reader = New PdfReader(oldFile)
+            Dim size As Rectangle = reader.GetPageSizeWithRotation(1)
+            document = New Document(size)
+        Else
+            newfile = "D:\NewScape\ADDPDentalClaimFormB.pdf"
+            document = New Document(PageSize.LETTER, 0, 0, 0, 0)
+        End If
 
-        Dim document As Document = New Document(size)
-        Dim fs As FileStream = New FileStream(newFile, FileMode.Create, FileAccess.Write)
+        Dim fs As FileStream = New FileStream(newfile, FileMode.Create, FileAccess.Write)
         Dim writer As PdfWriter = PdfWriter.GetInstance(document, fs)
 
         document.Open()
@@ -206,14 +214,14 @@ Public Class AppManager
 
         'Field 18h
         If dtTooth.Rows.Count > 7 Then
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_RIGHT, New Phrase(dtTooth.Rows(7).Item("Tooth").ToString, fc8), hdrStartLeft + 38, hdrStartTop - 533, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtTooth.Rows(7).Item("Surface").ToString, fc8), hdrStartLeft + 64, hdrStartTop - 533, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtTooth.Rows(7).Item("Description").ToString, fc8), hdrStartLeft + 110, hdrStartTop - 533, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtTooth.Rows(7).Item("dtDosMM").ToString, fc8), hdrStartLeft + 385, hdrStartTop - 533, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtTooth.Rows(7).Item("dtDosDD").ToString, fc8), hdrStartLeft + 406, hdrStartTop - 533, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtTooth.Rows(7).Item("dtDosYY").ToString, fc8), hdrStartLeft + 423, hdrStartTop - 533, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtTooth.Rows(7).Item("dtCPTCode").ToString, fc8), hdrStartLeft + 452, hdrStartTop - 533, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_RIGHT, New Phrase(dtTooth.Rows(7).Item("dtCharge").ToString, fc8), hdrStartLeft + 576, hdrStartTop - 533, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_RIGHT, New Phrase(dtTooth.Rows(7).Item("Tooth").ToString, fc8), hdrStartLeft + 38, hdrStartTop - 534, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtTooth.Rows(7).Item("Surface").ToString, fc8), hdrStartLeft + 64, hdrStartTop - 534, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtTooth.Rows(7).Item("Description").ToString, fc8), hdrStartLeft + 110, hdrStartTop - 534, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtTooth.Rows(7).Item("dtDosMM").ToString, fc8), hdrStartLeft + 385, hdrStartTop - 534, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtTooth.Rows(7).Item("dtDosDD").ToString, fc8), hdrStartLeft + 406, hdrStartTop - 534, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtTooth.Rows(7).Item("dtDosYY").ToString, fc8), hdrStartLeft + 423, hdrStartTop - 534, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtTooth.Rows(7).Item("dtCPTCode").ToString, fc8), hdrStartLeft + 452, hdrStartTop - 534, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_RIGHT, New Phrase(dtTooth.Rows(7).Item("dtCharge").ToString, fc8), hdrStartLeft + 576, hdrStartTop - 534, 0)
             dTotalFees = dTotalFees + CDec(dtTooth.Rows(0).Item("dtCharge").ToString)
         End If
 
@@ -250,12 +258,18 @@ Public Class AppManager
         'Field 20b
         ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtDen.Rows(0).Item("dtSign").ToString, fc8), hdrStartLeft + 408, hdrStartTop - 640, 0)
 
-        Dim page As PdfImportedPage = writer.GetImportedPage(reader, 1)
-        cb.AddTemplate(page, 0, 0)
+        If PDFType = "P" Then
+            Dim page As PdfImportedPage = writer.GetImportedPage(reader, 1)
+            cb.AddTemplate(page, 0, 0)
+        End If
+
         document.Close()
         fs.Close()
         writer.Close()
-        reader.Close()
+
+        If PDFType = "P" Then
+            reader.Close()
+        End If
 
     End Sub
 
@@ -436,32 +450,32 @@ Public Class AppManager
 
         'Line 4 
         If dtRecSvcs.Rows.Count > 3 Then
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("dtDos").ToString, fc10), hdrStartLeft + 29, hdrStartTop - 337, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("Area").ToString, fc10), hdrStartLeft + 110, hdrStartTop - 337, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("System").ToString, fc10), hdrStartLeft + 132, hdrStartTop - 337, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("Number").ToString, fc10), hdrStartLeft + 152, hdrStartTop - 337, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("Surface").ToString, fc10), hdrStartLeft + 242, hdrStartTop - 337, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("ProcCode").ToString, fc10), hdrStartLeft + 280, hdrStartTop - 337, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("DiagPointer").ToString, fc10), hdrStartLeft + 330, hdrStartTop - 337, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("Qty").ToString, fc10), hdrStartLeft + 358, hdrStartTop - 337, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("Description").ToString, fc10), hdrStartLeft + 388, hdrStartTop - 337, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_RIGHT, New Phrase(dtRecSvcs.Rows(3).Item("Fee").ToString, fc10), hdrStartLeft + 595, hdrStartTop - 337, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("dtDos").ToString, fc10), hdrStartLeft + 29, hdrStartTop - 336, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("Area").ToString, fc10), hdrStartLeft + 110, hdrStartTop - 336, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("System").ToString, fc10), hdrStartLeft + 132, hdrStartTop - 336, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("Number").ToString, fc10), hdrStartLeft + 152, hdrStartTop - 336, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("Surface").ToString, fc10), hdrStartLeft + 242, hdrStartTop - 336, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("ProcCode").ToString, fc10), hdrStartLeft + 280, hdrStartTop - 336, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("DiagPointer").ToString, fc10), hdrStartLeft + 330, hdrStartTop - 336, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("Qty").ToString, fc10), hdrStartLeft + 358, hdrStartTop - 336, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(3).Item("Description").ToString, fc10), hdrStartLeft + 388, hdrStartTop - 336, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_RIGHT, New Phrase(dtRecSvcs.Rows(3).Item("Fee").ToString, fc10), hdrStartLeft + 595, hdrStartTop - 336, 0)
 
             dTotalFees = dTotalFees + CDec(dtRecSvcs.Rows(3).Item("Fee").ToString)
         End If
         'Line 5 
         If dtRecSvcs.Rows.Count > 4 Then
 
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("dtDos").ToString, fc10), hdrStartLeft + 29, hdrStartTop - 349, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("Area").ToString, fc10), hdrStartLeft + 110, hdrStartTop - 349, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("System").ToString, fc10), hdrStartLeft + 132, hdrStartTop - 349, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("Number").ToString, fc10), hdrStartLeft + 152, hdrStartTop - 349, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("Surface").ToString, fc10), hdrStartLeft + 242, hdrStartTop - 349, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("ProcCode").ToString, fc10), hdrStartLeft + 280, hdrStartTop - 349, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("DiagPointer").ToString, fc10), hdrStartLeft + 330, hdrStartTop - 349, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("Qty").ToString, fc10), hdrStartLeft + 358, hdrStartTop - 349, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("Description").ToString, fc10), hdrStartLeft + 388, hdrStartTop - 349, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_RIGHT, New Phrase(dtRecSvcs.Rows(4).Item("Fee").ToString, fc10), hdrStartLeft + 595, hdrStartTop - 349, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("dtDos").ToString, fc10), hdrStartLeft + 29, hdrStartTop - 348, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("Area").ToString, fc10), hdrStartLeft + 110, hdrStartTop - 348, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("System").ToString, fc10), hdrStartLeft + 132, hdrStartTop - 348, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("Number").ToString, fc10), hdrStartLeft + 152, hdrStartTop - 348, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("Surface").ToString, fc10), hdrStartLeft + 242, hdrStartTop - 348, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("ProcCode").ToString, fc10), hdrStartLeft + 280, hdrStartTop - 348, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("DiagPointer").ToString, fc10), hdrStartLeft + 330, hdrStartTop - 348, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("Qty").ToString, fc10), hdrStartLeft + 358, hdrStartTop - 348, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(4).Item("Description").ToString, fc10), hdrStartLeft + 388, hdrStartTop - 348, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_RIGHT, New Phrase(dtRecSvcs.Rows(4).Item("Fee").ToString, fc10), hdrStartLeft + 595, hdrStartTop - 348, 0)
             dTotalFees = dTotalFees + CDec(dtRecSvcs.Rows(4).Item("Fee").ToString)
         End If
 
@@ -527,16 +541,16 @@ Public Class AppManager
 
         'Line 10 
         If dtRecSvcs.Rows.Count > 9 Then
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("DtDos").ToString, fc10), hdrStartLeft + 29, hdrStartTop - 408, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("Area").ToString, fc10), hdrStartLeft + 110, hdrStartTop - 408, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("System").ToString, fc10), hdrStartLeft + 132, hdrStartTop - 408, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("Number").ToString, fc10), hdrStartLeft + 152, hdrStartTop - 408, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("Surface").ToString, fc10), hdrStartLeft + 242, hdrStartTop - 408, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("ProcCode").ToString, fc10), hdrStartLeft + 280, hdrStartTop - 408, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("DiagPointer").ToString, fc10), hdrStartLeft + 330, hdrStartTop - 408, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("Qty").ToString, fc10), hdrStartLeft + 358, hdrStartTop - 408, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("Description").ToString, fc10), hdrStartLeft + 388, hdrStartTop - 408, 0)
-            ColumnText.ShowTextAligned(canvas, Element.ALIGN_RIGHT, New Phrase(dtRecSvcs.Rows(9).Item("Fee").ToString, fc10), hdrStartLeft + 595, hdrStartTop - 408, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("DtDos").ToString, fc10), hdrStartLeft + 29, hdrStartTop - 409, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("Area").ToString, fc10), hdrStartLeft + 110, hdrStartTop - 409, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("System").ToString, fc10), hdrStartLeft + 132, hdrStartTop - 409, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("Number").ToString, fc10), hdrStartLeft + 152, hdrStartTop - 409, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("Surface").ToString, fc10), hdrStartLeft + 242, hdrStartTop - 409, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("ProcCode").ToString, fc10), hdrStartLeft + 280, hdrStartTop - 409, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("DiagPointer").ToString, fc10), hdrStartLeft + 330, hdrStartTop - 409, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("Qty").ToString, fc10), hdrStartLeft + 358, hdrStartTop - 409, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_LEFT, New Phrase(dtRecSvcs.Rows(9).Item("Description").ToString, fc10), hdrStartLeft + 388, hdrStartTop - 409, 0)
+            ColumnText.ShowTextAligned(canvas, Element.ALIGN_RIGHT, New Phrase(dtRecSvcs.Rows(9).Item("Fee").ToString, fc10), hdrStartLeft + 595, hdrStartTop - 409, 0)
             dTotalFees = dTotalFees + CDec(dtRecSvcs.Rows(9).Item("Fee").ToString)
         End If
 

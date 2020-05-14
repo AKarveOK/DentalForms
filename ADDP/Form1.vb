@@ -54,6 +54,7 @@ Public Class Form1
         dtTooth = db.DataAdapter(CommandType.Text, strSQL).Tables(0)
 
         AppManager.ADDPStamp("P", dtPat, dtDen, dtTooth)
+        AppManager.ADDPStamp("B", dtPat, dtDen, dtTooth)
 
 
         Dim dtHdr, dtBenPlanInfo, dtOthCvg, dtPolHldInfo, dtPatInfo, dtRecSvcs, dtFee, dtMissTInfo, dtDiag, dtClm As DataTable
@@ -132,6 +133,7 @@ Public Class Form1
         dtDen = db.DataAdapter(CommandType.Text, strSQL).Tables(0)
 
         AppManager.ADDPDental("P", dtHdr, dtBenPlanInfo, dtOthCvg, dtPolHldInfo, dtPatInfo, dtRecSvcs, dtFee, dtMissTInfo, dtDiag, dtClm, dtDen)
+        AppManager.ADDPDental("B", dtHdr, dtBenPlanInfo, dtOthCvg, dtPolHldInfo, dtPatInfo, dtRecSvcs, dtFee, dtMissTInfo, dtDiag, dtClm, dtDen)
 
         End
     End Sub
