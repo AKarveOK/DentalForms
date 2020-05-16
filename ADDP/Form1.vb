@@ -50,11 +50,17 @@ Public Class Form1
                 "  '97010' as dtCPTCode, '100.50' as dtCharge " &
                 "  UNION " &
                 " Select '24' as Tooth, 'FRONT' as Surface, 'INITAL EVAL' as Description, '04' as dtDosMM, '15' as dtDosDD, '2020' as dtDosYY, " &
-                "  '97010' as dtCPTCode, '100.50' as dtCharge "
+                "  '97010' as dtCPTCode, '100.50' as dtCharge " &
+                "  UNION " &
+                " Select '25' as Tooth, 'FRONT' as Surface, 'INITAL EVAL' as Description, '04' as dtDosMM, '15' as dtDosDD, '2020' as dtDosYY, " &
+                "  '97010' as dtCPTCode, '50.50' as dtCharge " &
+                "  UNION " &
+                " Select '26' as Tooth, 'FRONT' as Surface, 'INITAL EVAL' as Description, '04' as dtDosMM, '15' as dtDosDD, '2020' as dtDosYY, " &
+                "  '97010' as dtCPTCode, '10.50' as dtCharge "
         dtTooth = db.DataAdapter(CommandType.Text, strSQL).Tables(0)
 
-        AppManager.ADDPStamp("P", dtPat, dtDen, dtTooth)
-        AppManager.ADDPStamp("B", dtPat, dtDen, dtTooth)
+        AppManager.ADDPDental("P", "ADDP_C1234_A1234PP.pdf", dtPat, dtDen, dtTooth)
+        AppManager.ADDPDental("B", "ADDP_C1234_A1234B.pdf", dtPat, dtDen, dtTooth)
 
 
         Dim dtHdr, dtBenPlanInfo, dtOthCvg, dtPolHldInfo, dtPatInfo, dtRecSvcs, dtFee, dtMissTInfo, dtDiag, dtClm As DataTable
@@ -107,10 +113,16 @@ Public Class Form1
                 'D01' as DiagPointer,'1' as Qty,'SOME LONG DESCRIPTION' AS Description,'100.50' as Fee 
                   UNION
                 Select '10/10/2010' as dtDos, 'Y' as Area,'Z' as System,'3' as Number,'Flat' as Surface,'97019' as ProcCode,
-                'D01' as DiagPointer,'1' as Qty,'SOME LONG DESCRIPTION' AS Description,'100.50' as Fee "
+                'D01' as DiagPointer,'1' as Qty,'SOME LONG DESCRIPTION' AS Description,'100.50' as Fee 
+                UNION
+                Select '10/10/2010' as dtDos, 'Y' as Area,'Z' as System,'3' as Number,'Flat' as Surface,'97020' as ProcCode,
+                'D01' as DiagPointer,'1' as Qty,'SOME LONG DESCRIPTION' AS Description,'50.50' as Fee 
+                  UNION
+                Select '10/10/2010' as dtDos, 'Y' as Area,'Z' as System,'3' as Number,'Flat' as Surface,'97021' as ProcCode,
+                'D01' as DiagPointer,'1' as Qty,'SOME LONG DESCRIPTION' AS Description,'20.50' as Fee "
         dtRecSvcs = db.DataAdapter(CommandType.Text, strSQL).Tables(0)
 
-        strSQL = " Select '110.00' as OthFee1,'0.00' as OthFee2 "
+                strSQL = " Select '110.00' as OthFee1,'0.00' as OthFee2 "
         dtFee = db.DataAdapter(CommandType.Text, strSQL).Tables(0)
 
         strSQL = " Select '' as Tooth1,'X' as Tooth2,'' as Tooth3,'' as Tooth4,'' as Tooth5,'' as Tooth6,'' as Tooth7,'' as Tooth8,'' as Tooth9,'' as Tooth10,
@@ -132,8 +144,8 @@ Public Class Form1
         '890-687-7868' as DPhone,'ADDPROVID987' as DAddlProvId "
         dtDen = db.DataAdapter(CommandType.Text, strSQL).Tables(0)
 
-        AppManager.ADDPDental("P", dtHdr, dtBenPlanInfo, dtOthCvg, dtPolHldInfo, dtPatInfo, dtRecSvcs, dtFee, dtMissTInfo, dtDiag, dtClm, dtDen)
-        AppManager.ADDPDental("B", dtHdr, dtBenPlanInfo, dtOthCvg, dtPolHldInfo, dtPatInfo, dtRecSvcs, dtFee, dtMissTInfo, dtDiag, dtClm, dtDen)
+        AppManager.ADADental("P", "ADA_C1234_A1234PP.pdf", dtHdr, dtBenPlanInfo, dtOthCvg, dtPolHldInfo, dtPatInfo, dtRecSvcs, dtFee, dtMissTInfo, dtDiag, dtClm, dtDen)
+        AppManager.ADADental("B", "ADA_C1234_A1234B.pdf", dtHdr, dtBenPlanInfo, dtOthCvg, dtPolHldInfo, dtPatInfo, dtRecSvcs, dtFee, dtMissTInfo, dtDiag, dtClm, dtDen)
 
         End
     End Sub
